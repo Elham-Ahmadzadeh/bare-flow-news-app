@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler'
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
-
+import Footer from './componets/Footer'
+import { navigationRef } from './RootNavigation'
 
 import Home from './Home'
 import Header from './componets/Header'
@@ -28,10 +28,7 @@ function App() {
     )
   } else {
     return (
-      <NavigationContainer
-
-      >
-
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
           <Stack.Screen
             name="Globomantics"
@@ -41,6 +38,7 @@ function App() {
             }}
           />
         </Stack.Navigator>
+        <Footer />
       </NavigationContainer>
     )
   }
