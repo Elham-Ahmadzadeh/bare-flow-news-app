@@ -7,7 +7,7 @@ import AppLoading from 'expo-app-loading'
 import Footer from './componets/Footer'
 import { navigationRef } from './RootNavigation'
 
-import Home from './Home'
+import Home from './pages/Home'
 import Header from './componets/Header'
 
 const Stack = createStackNavigator()
