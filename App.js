@@ -1,21 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+import Home from './Home'
+import Header from './componets/Header'
+
+const Stack = createStackNavigator()
+
+function App() {
+  const [fontsLoaded] = useFonts({
+    openSans: require('./assets/fonts/OpenSans-Regular.ttf'),
+  })
+  state = {
+    isReady: false,
+  }
+  if (!fontsLoaded && !state.isReady) {
+    return (
+      <AppLoading
+        onFinish={() => state({ isReady: true })}
+        onError={console.warn}
+      />
+    )
+  } else {
+    return (
+      <NavigationContainer
+
+      >
+
+        <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
+          <Stack.Screen
+            name="Globomantics"
+            component={Home}
+            options={{
+              header: () => <Header headerDisplay="Globomantics" />,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
