@@ -6,7 +6,7 @@ import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import Footer from './componets/Footer'
 import { navigationRef } from './RootNavigation'
-
+import { NewsContextProvider } from './context/NewsContext'
 import Home from './pages/Home'
 import Header from './componets/Header'
 
@@ -28,18 +28,20 @@ function App() {
     )
   } else {
     return (
+      <NewsContextProvider>
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
-          <Stack.Screen
-            name="Globomantics"
-            component={Home}
-            options={{
-              header: () => <Header headerDisplay="Globomantics" />,
-            }}
-          />
-        </Stack.Navigator>
-        <Footer />
+             <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
+            <Stack.Screen
+              name="Globomantics"
+              component={Home}
+              options={{
+                header: () => <Header headerDisplay="Globomantics" />,
+              }}
+            />
+          </Stack.Navigator>
+          <Footer />
       </NavigationContainer>
+      </NewsContextProvider>
     )
   }
 }
