@@ -9,12 +9,14 @@ import { navigationRef } from './RootNavigation'
 import { NewsContextProvider } from './context/NewsContext'
 import Home from './pages/Home'
 import Header from './componets/Header'
+import NewsDetail from './pages/NewsDetail'
 
 const Stack = createStackNavigator()
 
 function App() {
   const [fontsLoaded] = useFonts({
     openSans: require('./assets/fonts/OpenSans-Regular.ttf'),
+    openSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
   })
   state = {
     isReady: false,
@@ -29,8 +31,8 @@ function App() {
   } else {
     return (
       <NewsContextProvider>
-      <NavigationContainer ref={navigationRef}>
-             <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
+        <NavigationContainer ref={navigationRef}>
+          <Stack.Navigator initialRouteName="Globomantics" headerMode="screen">
             <Stack.Screen
               name="Globomantics"
               component={Home}
@@ -38,9 +40,16 @@ function App() {
                 header: () => <Header headerDisplay="Globomantics" />,
               }}
             />
+            <Stack.Screen
+              name="NewsDetail"
+              component={NewsDetail}
+              options={{
+                header: () => <Header headerDisplay="News" />,
+              }}
+            />
           </Stack.Navigator>
           <Footer />
-      </NavigationContainer>
+        </NavigationContainer>
       </NewsContextProvider>
     )
   }

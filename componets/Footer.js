@@ -4,32 +4,26 @@ import * as RootNavigation from '../RootNavigation'
 
 function Footer() {
   return (
-   <View style={styles.footer}>
-     <TouchableOpacity
-     style={styles.button}
-     onPress={()=>RootNavigation.navigate('Globomantics')}
-     >
-       <Text>Home</Text>
-     </TouchableOpacity>
+    <View style={styles.footer}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => RootNavigation.navigate('Globomantics')}
+      >
+        <Text>Home</Text>
+      </TouchableOpacity>
 
-     <TouchableOpacity
-     style={styles.button}
-     >
-       <Text>About</Text>
-     </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text>About</Text>
+      </TouchableOpacity>
 
-     <TouchableOpacity
-     style={styles.button}
-     >
-       <Text>Quote</Text>
-     </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text>Quote</Text>
+      </TouchableOpacity>
 
-     <TouchableOpacity
-     style={styles.button}
-     >
-       <Text>Catalog</Text>
-     </TouchableOpacity>
-   </View>
+      <TouchableOpacity style={styles.button}>
+        <Text>Catalog</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
 const styles = StyleSheet.create({
@@ -38,11 +32,11 @@ const styles = StyleSheet.create({
     height: 80,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   button: {
-    padding: 20
-  }
+    padding: 20,
+  },
 })
 
 export default Footer

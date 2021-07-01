@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
   FlatList,
   Image,
   TouchableWithoutFeedback,
@@ -13,36 +12,29 @@ import { NewsContext } from '../context/NewsContext'
 
 export default function Home({ navigation }) {
   const { newsDataInfo } = useContext(NewsContext)
-
+  //console.log(newsDataInfo.articles[0])
   const storyItem = ({ item }) => {
     return (
       <TouchableWithoutFeedback
-      onPress={navigation.navigate('NewsDetail', { url: item.url })}
+        onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
       >
         <View style={styles.listNews}>
           <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.author}>{item.author}</Text>
           <Image style={styles.imageNews} source={{ uri: item.urlToImage }} />
           <Text style={styles.newsDescription}>{item.description}</Text>
         </View>
       </TouchableWithoutFeedback>
-
     )
   }
+
   return (
-    newsDataInfo && (
-      <View style={styles.container}>
-        {dataLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={newsDataInfo}
-            renderItem={storyItem}
-            keyExtractor={(item) => item.url}
-          />
-        )}
-      </View>
-    )
+    <View style={styles.container}>
+      <FlatList
+        data={newsDataInfo.articles}
+        renderItem={storyItem}
+        keyExtractor={(item) => item.url}
+      />
+    </View>
   )
 }
 
@@ -57,24 +49,28 @@ const styles = StyleSheet.create({
   },
   listNews: {
     paddingTop: 15,
-    paddingBottom: 25,
+    paddingBottom: 40,
     borderBottomColor: 'black',
     borderBottomWidth: 1,
   },
   title: {
-    paddingBottom: 10,
-    fontFamily: 'openSans',
+    paddingBottom: 20,
+    fontSize: 25,
+    fontFamily: 'openSansBold',
     fontWeight: 'bold',
-  },
-  author: {
     paddingBottom: 10,
   },
+
   imageNews: {
-    height: 100,
+    height: 310,
     width: '98%',
   },
   newsDescription: {
     fontFamily: 'openSans',
     fontStyle: 'italic',
+    paddingTop: 26,
+    paddingBottom: 5,
+    marginTop: 14,
+    fontSize: 15
   },
 })
