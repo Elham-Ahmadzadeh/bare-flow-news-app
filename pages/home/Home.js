@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import {
-  StyleSheet,
   Text,
   View,
   Image,
@@ -8,6 +7,7 @@ import {
   SafeAreaView,
   Animated,
 } from 'react-native'
+import Styles from './Styles'
 
 import { NewsContext } from '../../context/NewsContext'
 import ThemeContext from '../../context/ThemeContext'
@@ -22,19 +22,19 @@ export default function Home({ navigation }) {
       <View
         key={item.url}
         style={[
-          styles.listNews,
+          Styles.listNews,
           { borderBottomColor: MainTheme.borderBottomColor },
         ]}
       >
-        <Text style={[styles.title, { color: MainTheme.color }]}>
+        <Text style={[Styles.title, { color: MainTheme.color }]}>
           {item.title}
         </Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
         >
-          <Image style={styles.imageNews} source={{ uri: item.urlToImage }} />
+          <Image style={Styles.imageNews} source={{ uri: item.urlToImage }} />
         </TouchableOpacity>
-        <Text style={[styles.newsDescription, { color: MainTheme.color }]}>
+        <Text style={[Styles.newsDescription, { color: MainTheme.color }]}>
           {item.description}
         </Text>
       </View>
@@ -43,7 +43,7 @@ export default function Home({ navigation }) {
 
   return (
     <SafeAreaView
-      style={[styles.container, { backgroundColor: MainTheme.backgroundColor }]}
+      style={[Styles.container, { backgroundColor: MainTheme.backgroundColor }]}
     >
       <Animated.FlatList
         data={newsData}
@@ -68,37 +68,4 @@ export default function Home({ navigation }) {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  listNews: {
-    paddingTop: 20,
-    paddingBottom: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
-  },
-  title: {
-    padding: 10,
-    fontSize: 20,
-    fontFamily: 'openSansBold',
-    margin: 10,
-  },
-  imageNews: {
-    height: 210,
-    width: '98%',
-    margin: 3,
-  },
-  newsDescription: {
-    fontFamily: 'openSans',
-    margin: 10,
-    padding: 10,
-    paddingBottom: 5,
-    marginTop: 14,
-    fontSize: 15,
-  },
-})
+
