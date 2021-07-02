@@ -13,7 +13,7 @@ function Footer() {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button}>
-        <Text>About</Text>
+        <Text>Chat</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button}>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    backgroundColor: '#ceecd0'
   },
   button: {
     padding: 20,

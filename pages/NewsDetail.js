@@ -11,13 +11,9 @@ import {
 import { NewsContext } from '../context/NewsContext'
 
 export default function NewsDetail({ route, navigation }) {
-  const { newsDataInfo } = useContext(NewsContext)
-
-  const selectedNews = newsDataInfo.articles
-
+  const { newsData } = useContext(NewsContext)
   const { url } = route.params
-
-  const selectedPost = selectedNews.find((post) => post.url === url)
+  const selectedPost = newsData.find((post) => post.url === url)
 
   return (
     <View style={styles.container}>
@@ -57,7 +53,7 @@ const styles = StyleSheet.create({
   title: {
     paddingBottom: 10,
     fontFamily: 'openSansBold',
-    fontWeight: 'bold',
+
   },
   author: {
     paddingBottom: 10,
