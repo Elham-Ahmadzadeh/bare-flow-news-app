@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {
   StyleSheet,
   Text,
-  View,
+  SafeAreaView,
   TouchableOpacity,
   Image,
   ScrollView,
@@ -16,7 +16,7 @@ export default function NewsDetail({ route, navigation }) {
   const selectedPost = newsData.find((post) => post.url === url)
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.goBack()}
@@ -32,9 +32,10 @@ export default function NewsDetail({ route, navigation }) {
         <Text style={styles.author}>{selectedPost.author}</Text>
         <Text style={styles.newsDescription}>{selectedPost.description}</Text>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -53,7 +54,6 @@ const styles = StyleSheet.create({
   title: {
     paddingBottom: 10,
     fontFamily: 'openSansBold',
-
   },
   author: {
     paddingBottom: 10,

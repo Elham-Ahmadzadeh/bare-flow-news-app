@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  SafeAreaView
 } from 'react-native'
 
 import { NewsContext } from '../context/NewsContext'
@@ -40,7 +41,7 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <View
+    <SafeAreaView
       style={(styles.container, { backgroundColor: MainTheme.backgroundColor })}
     >
       <FlatList
@@ -49,12 +50,12 @@ export default function Home({ navigation }) {
         keyExtractor={(item) => item.url}
         windowSize={10}
         initialListSize={8}
-        initialNumToRender={8}
+        initialNumToRender={4}
         maxToRenderPerBatch={9}
         removeClippedSubviews={true}
         legacyImplementation={true}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

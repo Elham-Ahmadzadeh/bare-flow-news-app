@@ -2,9 +2,9 @@ import 'react-native-gesture-handler'
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Header from '../componets/Header'
-import Home from '../pages/Home'
-import NewsDetail from '../pages/NewsDetail'
-import Chat from '../pages/Chat'
+import Home from '../home/Home'
+import NewsDetail from '../home/NewsDetail'
+import Chat from '../pages/chat/Chat'
 
 export default function AppNavigator () {
 

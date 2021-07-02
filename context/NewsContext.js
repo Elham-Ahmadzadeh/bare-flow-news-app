@@ -20,7 +20,7 @@ export const NewsContextProvider = (props) => {
     }
     getNews()
   }, [])
-const newsData =  newsDataInfo.articles
+  const newsData = newsDataInfo.articles
   return (
     <NewsContext.Provider value={{ newsData }}>
       {props.children}

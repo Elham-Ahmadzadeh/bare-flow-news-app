@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,11 @@ import {
  ScrollView,
 
 } from 'react-native'
-export default function Chat({navigation}) {
+import ThemeContext from '../../context/ThemeContext'
+
+export default function Chat() {
+  const MainTheme = useContext(ThemeContext)
+
 return (
   <View style={styles.container}>
 <Text>Chat App</Text></View>
