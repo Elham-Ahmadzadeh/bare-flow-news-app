@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+
 import * as RootNavigation from '../navigator/RootNavigation'
 
 function Footer() {
   return (
     <View style={styles.footer}>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => RootNavigation.navigate('Globomantics')}

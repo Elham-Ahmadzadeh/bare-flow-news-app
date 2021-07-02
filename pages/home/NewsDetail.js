@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native'
 
-import { NewsContext } from '../context/NewsContext'
+import { NewsContext } from '../../context/NewsContext'
 
 export default function NewsDetail({ route, navigation }) {
   const { newsData } = useContext(NewsContext)

@@ -6,11 +6,12 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  Animated
 } from 'react-native'
 
-import { NewsContext } from '../context/NewsContext'
-import ThemeContext from '../context/ThemeContext'
+import { NewsContext } from '../../context/NewsContext'
+import ThemeContext from '../../context/ThemeContext'
 
 export default function Home({ navigation }) {
   const { newsData } = useContext(NewsContext)
@@ -44,7 +45,7 @@ export default function Home({ navigation }) {
     <SafeAreaView
       style={(styles.container, { backgroundColor: MainTheme.backgroundColor })}
     >
-      <FlatList
+      <Animated.FlatList
         data={newsData}
         renderItem={storyItem}
         keyExtractor={(item) => item.url}
