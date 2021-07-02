@@ -5,7 +5,7 @@ import {
   View,
   FlatList,
   Image,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native'
 
 import { NewsContext } from '../context/NewsContext'
@@ -17,27 +17,25 @@ export default function Home({ navigation }) {
 
   const storyItem = ({ item }) => {
     return (
-      <View>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
+      <TouchableOpacity
+        onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
+      >
+        <View
+          key={item.url}
+          style={[
+            styles.listNews,
+            { borderBottomColor: MainTheme.borderBottomColor },
+          ]}
         >
-          <View
-            key={item.url}
-            style={[
-              styles.listNews,
-              { borderBottomColor: MainTheme.borderBottomColor },
-            ]}
-          >
-            <Text style={[styles.title, { color: MainTheme.color }]}>
-              {item.title}
-            </Text>
-            <Image style={styles.imageNews} source={{ uri: item.urlToImage }} />
-            <Text style={[styles.newsDescription, { color: MainTheme.color }]}>
-              {item.description}
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
+          <Text style={[styles.title, { color: MainTheme.color }]}>
+            {item.title}
+          </Text>
+          <Image style={styles.imageNews} source={{ uri: item.urlToImage }} />
+          <Text style={[styles.newsDescription, { color: MainTheme.color }]}>
+            {item.description}
+          </Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -49,9 +47,12 @@ export default function Home({ navigation }) {
         data={newsData}
         renderItem={storyItem}
         keyExtractor={(item) => item.url}
-        initialNumToRender={5}
-        maxToRenderPerBatch={10}
         windowSize={10}
+        initialListSize={8}
+        initialNumToRender={8}
+        maxToRenderPerBatch={9}
+        removeClippedSubviews={true}
+        legacyImplementation={true}
       />
     </View>
   )

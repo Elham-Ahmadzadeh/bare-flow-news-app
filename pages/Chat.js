@@ -3,11 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
-  Image,
-  TouchableWithoutFeedback,
+ ScrollView,
+
 } from 'react-native'
-export default function Chat() {
+export default function Chat({navigation}) {
 return (
   <View style={styles.container}>
 <Text>Chat App</Text></View>

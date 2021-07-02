@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import * as RootNavigation from '../RootNavigation'
+import * as RootNavigation from '../navigator/RootNavigation'
 
 function Footer() {
   return (
@@ -12,7 +12,10 @@ function Footer() {
         <Text>Home</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => RootNavigation.navigate('Chat')}
+      >
         <Text>Chat</Text>
       </TouchableOpacity>
 
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    backgroundColor: '#ceecd0'
+    backgroundColor: '#ceecd0',
   },
   button: {
     padding: 20,
