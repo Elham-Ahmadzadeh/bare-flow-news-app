@@ -29,7 +29,7 @@ function App() {
     openSans: require('./assets/fonts/OpenSans-Regular.ttf'),
     openSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
   })
-  state = {
+  let state = {
     isReady: false,
   }
   if (!fontsLoaded && !state.isReady) {

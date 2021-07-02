@@ -3,11 +3,10 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
   Image,
   TouchableOpacity,
   SafeAreaView,
-  Animated
+  Animated,
 } from 'react-native'
 
 import { NewsContext } from '../../context/NewsContext'
@@ -17,33 +16,34 @@ export default function Home({ navigation }) {
   const { newsData } = useContext(NewsContext)
   const MainTheme = useContext(ThemeContext)
 
+  const scrollY = React.useRef(new Animated.Value(0)).current
   const storyItem = ({ item }) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
+      <View
+        key={item.url}
+        style={[
+          styles.listNews,
+          { borderBottomColor: MainTheme.borderBottomColor },
+        ]}
       >
-        <View
-          key={item.url}
-          style={[
-            styles.listNews,
-            { borderBottomColor: MainTheme.borderBottomColor },
-          ]}
+        <Text style={[styles.title, { color: MainTheme.color }]}>
+          {item.title}
+        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('NewsDetail', { url: item.url })}
         >
-          <Text style={[styles.title, { color: MainTheme.color }]}>
-            {item.title}
-          </Text>
           <Image style={styles.imageNews} source={{ uri: item.urlToImage }} />
-          <Text style={[styles.newsDescription, { color: MainTheme.color }]}>
-            {item.description}
-          </Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <Text style={[styles.newsDescription, { color: MainTheme.color }]}>
+          {item.description}
+        </Text>
+      </View>
     )
   }
 
   return (
     <SafeAreaView
-      style={(styles.container, { backgroundColor: MainTheme.backgroundColor })}
+      style={[styles.container, { backgroundColor: MainTheme.backgroundColor }]}
     >
       <Animated.FlatList
         data={newsData}
@@ -55,6 +55,14 @@ export default function Home({ navigation }) {
         maxToRenderPerBatch={9}
         removeClippedSubviews={true}
         legacyImplementation={true}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          {
+            useNativeDriver: false,
+          }
+        )}
       />
     </SafeAreaView>
   )
@@ -75,19 +83,20 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
   },
   title: {
-    paddingBottom: 20,
+    padding: 10,
     fontSize: 20,
     fontFamily: 'openSansBold',
-    paddingBottom: 12,
+    margin: 10,
   },
   imageNews: {
     height: 210,
     width: '98%',
+    margin: 3,
   },
   newsDescription: {
     fontFamily: 'openSans',
-    fontStyle: 'italic',
-    paddingTop: 26,
+    margin: 10,
+    padding: 10,
     paddingBottom: 5,
     marginTop: 14,
     fontSize: 15,

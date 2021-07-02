@@ -7,16 +7,17 @@ import {
   Image,
   ScrollView,
 } from 'react-native'
-
 import { NewsContext } from '../../context/NewsContext'
+import ThemeContext from '../../context/ThemeContext'
 
 export default function NewsDetail({ route, navigation }) {
   const { newsData } = useContext(NewsContext)
+  const MainTheme = useContext(ThemeContext)
   const { url } = route.params
   const selectedPost = newsData.find((post) => post.url === url)
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView  style={[styles.container, { backgroundColor: MainTheme.backgroundColor }]}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.goBack()}
@@ -24,13 +25,13 @@ export default function NewsDetail({ route, navigation }) {
         <Text style={styles.buttonText}>Go Back</Text>
       </TouchableOpacity>
       <ScrollView>
-        <Text style={styles.title}>{selectedPost.title}</Text>
+        <Text  style={[styles.title, { color: MainTheme.color }]}>{selectedPost.title}</Text>
         <Image
           style={styles.imageNews}
           source={{ uri: selectedPost.urlToImage }}
         ></Image>
         <Text style={styles.author}>{selectedPost.author}</Text>
-        <Text style={styles.newsDescription}>{selectedPost.description}</Text>
+        <Text style={[styles.newsDescription, { color: MainTheme.color }]}>{selectedPost.description}</Text>
       </ScrollView>
     </SafeAreaView>
   )
