@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar, Switch } from 'react-native'
 import { EventRegister } from 'react-native-event-listeners'
 import ThemeContext from '../context/ThemeContext'
 
+
 export default function Header(props) {
   const [isEnabled, setIsEnabled] = useState(false)
   const MainTheme = useContext(ThemeContext)
@@ -10,7 +11,6 @@ export default function Header(props) {
   return (
     <View style={styles.header}>
       <Text style={styles.text}>{props.headerDisplay}</Text>
-
       <StatusBar style="auto" />
       <Switch
         trackColor={{ false: '#ffff', true: '#268b86' }}

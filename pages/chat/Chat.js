@@ -1,20 +1,12 @@
-import React, {useContext} from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
- ScrollView,
-
-} from 'react-native'
+import React, { useContext } from 'react'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 import ThemeContext from '../../context/ThemeContext'
+import TopTabChatNavigator from '../../navigator/TopTabChatNavigator'
 
-export default function Chat() {
+export default function ChatList() {
   const MainTheme = useContext(ThemeContext)
-
-return (
-  <View style={styles.container}>
-<Text>Chat App</Text></View>
-)
+  return <TopTabChatNavigator />
 }
 const styles = StyleSheet.create({
   container: {
@@ -25,5 +17,3 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 })
-
-

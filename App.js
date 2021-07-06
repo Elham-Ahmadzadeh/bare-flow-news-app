@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import ThemeContext from './context/ThemeContext'
 import { NewsContextProvider } from './context/NewsContext'
-import MainTheme from './MainTheme'
+import MainTheme from './style/MainTheme'
 import Footer from './componets/Footer'
 
 function App() {
