@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler'
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Ionicons } from '@expo/vector-icons'
 import Header from '../componets/Header'
 import Home from '../pages/home/Home'
 import NewsDetail from '../pages/home/NewsDetail'
-import Chat from '../pages/chat/Chat'
+import ChatTopTab from '../pages/chat/ChatTopTab'
+import LoginScreen from '../pages/auth/LoginScreen'
+import { HeaderBackButton } from '@react-navigation/stack'
 
 export default function AppNavigator() {
   const Stack = createStackNavigator()
@@ -29,8 +29,22 @@ export default function AppNavigator() {
       />
       <Stack.Screen
         name="Chat"
-        component={Chat}
+        component={ChatTopTab}
+        options={({ navigation, route }) => ({
+          headerLeft: (props) => (
+            <HeaderBackButton
+              {...props}
+              onPress={() => navigation.navigate('Globomantics')}
+              label="Back"
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
         options={{
+          headerLeft: () => null,
           headerStyle: {
             backgroundColor: '#ceecd0',
           },
@@ -39,4 +53,3 @@ export default function AppNavigator() {
     </Stack.Navigator>
   )
 }
-const styles = StyleSheet.create({})

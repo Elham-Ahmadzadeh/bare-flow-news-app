@@ -8,7 +8,6 @@ import {
   Animated,
 } from 'react-native'
 import Styles from './Styles'
-
 import { NewsContext } from '../../context/NewsContext'
 import ThemeContext from '../../context/ThemeContext'
 
@@ -67,5 +66,3 @@ export default function Home({ navigation }) {
     </SafeAreaView>
   )
 }
-
-

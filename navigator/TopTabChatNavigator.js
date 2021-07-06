@@ -1,17 +1,14 @@
 import * as React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import Home from '../pages/home/Home'
-import Profile from '../pages/profile/Profile'
-import { View, Text } from 'react-native'
+import ContactList from '../pages/screen/ContactList'
+import Chat from '../pages/screen/Chat'
 
 const Tab = createMaterialTopTabNavigator()
 export default function TopTabChatNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="contacts" component={ContactList} />
+      <Tab.Screen name="chat" component={Chat} />
     </Tab.Navigator>
   )
 }
-

@@ -21,8 +21,9 @@ function Footer() {
         <Text>Chat</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Text>Quote</Text>
+      <TouchableOpacity style={styles.button}
+        onPress={() => RootNavigation.navigate('Login')}>
+        <Text>Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button}>
