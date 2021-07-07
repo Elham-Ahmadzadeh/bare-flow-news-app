@@ -5,7 +5,7 @@ import Header from '../componets/Header'
 import Home from '../pages/home/Home'
 import NewsDetail from '../pages/home/NewsDetail'
 import ChatTopTab from '../pages/chat/ChatTopTab'
-import LoginScreen from '../pages/auth/LoginScreen'
+import LoginScreen from '../pages/screens/LoginScreen'
 import { HeaderBackButton } from '@react-navigation/stack'
 
 export default function AppNavigator() {
