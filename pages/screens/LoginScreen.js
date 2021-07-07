@@ -13,15 +13,21 @@ import {
   StyledTextLabel,
   StyledButton,
   StyledButtonText,
+  messageBox,
+  StyledLine,
+  ExtraText,
+  ExtraView,
+  TextLink,
+  TextLinkCotent,
   Colors
 } from './Styles'
 import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
-import { Octicons, Ionicons } from '@expo/vector-icons'
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
 
 // Formik
 import { Formik } from 'formik'
-const { brand, darkLight } = Colors
-export default function LoginScreen() {
+const { brand, darkLight, primary } = Colors
+export default function LoginScreen({ navigation, route }) {
   const [hidePassword, setHidePassword] = useState(true)
   return (
     <KeyboardAvoidingView
@@ -46,7 +52,7 @@ export default function LoginScreen() {
             >
               {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <StyledFormArea>
-                  <LoginTextInput
+                  <ScreenTextInput
                     label="Email Address"
                     icon="mail"
                     placeholder="hello@gmail.com"
@@ -56,8 +62,7 @@ export default function LoginScreen() {
                     value={values.email}
                     keyboardType="email-address"
                   />
-
-                  <LoginTextInput
+                  <ScreenTextInput
                     label="Password"
                     icon="lock"
                     placeholder="* * * * *"
@@ -70,6 +75,23 @@ export default function LoginScreen() {
                     hidePassword={hidePassword}
                     setHidePassword={setHidePassword}
                   />
+                  {/*   <messageBox>.....Hello</messageBox> */}
+                  <StyledButton onPress={handleSubmit}>
+                    <StyledButtonText>Login</StyledButtonText>
+                  </StyledButton>
+                  <StyledLine />
+                  <StyledButton google={true} onPress={handleSubmit}>
+                    <Fontisto name="google" color={primary} size={25} />
+                    <StyledButtonText google={true}>
+                      Sign in with Google
+                    </StyledButtonText>
+                  </StyledButton>
+                  <ExtraView>
+                    <ExtraText>Dont have an account?</ExtraText>
+                    <TextLinkCotent onPress={() => navigation.push('Signup')}>
+                      Sign up
+                    </TextLinkCotent>
+                  </ExtraView>
                 </StyledFormArea>
               )}
             </Formik>
@@ -79,7 +101,7 @@ export default function LoginScreen() {
     </KeyboardAvoidingView>
   )
 }
-const LoginTextInput = ({
+const ScreenTextInput = ({
   label,
   icon,
   isPassword,

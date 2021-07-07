@@ -6,6 +6,7 @@ import Home from '../pages/home/Home'
 import NewsDetail from '../pages/home/NewsDetail'
 import ChatTopTab from '../pages/chat/ChatTopTab'
 import LoginScreen from '../pages/screens/LoginScreen'
+import SignupScreen from '../pages/screens/SignupScreen'
 import { HeaderBackButton } from '@react-navigation/stack'
 
 export default function AppNavigator() {
@@ -37,12 +38,23 @@ export default function AppNavigator() {
               onPress={() => navigation.navigate('Globomantics')}
               label="Back"
             />
+
           ),
         })}
       />
       <Stack.Screen
         name="Login"
         component={LoginScreen}
+        options={{
+          headerLeft: () => null,
+          headerStyle: {
+            backgroundColor: '#ceecd0',
+          },
+        }}
+      />
+         <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
         options={{
           headerLeft: () => null,
           headerStyle: {

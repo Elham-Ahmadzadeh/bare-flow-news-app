@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import constants from 'expo-constants'
+/* import constants from 'expo-constants'
 
-const StatusBarHeight = constants.statusBarHeight
+const StatusBarHeight = constants.statusBarHeight */
 
 // Colors
 export const Colors = {
@@ -18,7 +18,6 @@ const { primary, secondry, tertiary, darkLight, brand, green, red } = Colors
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 24px;
-  padding-top: ${StatusBarHeight + 10}px;
   background-color: ${primary};
 `
 
@@ -30,7 +29,8 @@ export const InnerContainer = styled.View`
 
 export const PageLogo = styled.Image`
   width: 290px;
-  height: 130px;
+  height: 180px;
+  border-radius: 5px;
 `
 
 export const PageTitle = styled.Text`
@@ -87,14 +87,62 @@ export const StyledRightIcon = styled.TouchableOpacity`
 
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
-  top: 38px;
-  position: absolute;
+  align-items: center;
+  background-color: ${brand};
   border-radius: 5px;
-  margin-vertical: 5px;
+  margin-vertical: 10px;
   height: 60px;
+
+  ${(props) =>
+    props.google === true &&
+    `
+  background-color: ${green};
+  flex-direction: row;
+  justify-content: center;
+  `}
 `
 
 export const StyledButtonText = styled.Text`
   color: ${primary};
   font-size: 16px;
+  ${(props) =>
+    props.google === true &&
+    `
+  background-color: ${green};
+  margin: 6px;
+  `}
+`
+
+export const messageBox = styled.Text`
+  text-align: center;
+  font-size: 13px;
+`
+export const StyledLine = styled.View`
+  height: 1px;
+  width: 100%;
+  background-color: ${darkLight};
+  margin-vertical: 10px;
+`
+export const ExtraView = styled.View`
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+`
+
+export const ExtraText = styled.Text`
+  justify-content: center;
+  align-content: center;
+  color: ${tertiary};
+  font-size: 10px;
+`
+
+export const TextLink = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+`
+
+export const TextLinkCotent = styled.Text`
+  color: ${brand};
+  font-size: 15px;
 `
