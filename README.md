@@ -13,6 +13,10 @@ I had to add some config to ios/<your_package_name>/Supporting/Expo.plist, and n
 
     <key>EXUpdatesURL</key>
     <string>https://example.com</string>
+    
+    
+    
+    npm update to see the app is working on IOS
 
 
 
