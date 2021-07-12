@@ -1,7 +1,4 @@
 import styled from 'styled-components'
-/* import constants from 'expo-constants'
-
-const StatusBarHeight = constants.statusBarHeight */
 
 // Colors
 export const Colors = {
@@ -84,6 +81,12 @@ export const StyledRightIcon = styled.TouchableOpacity`
   position: absolute;
   z-index: 1;
 `
+export const StyledCalendarIcon = styled.View`
+  left: 15px;
+  top: 25px;
+  position: absolute;
+  z-index: 1;
+`
 
 export const StyledButton = styled.TouchableOpacity`
   padding: 15px;
@@ -134,12 +137,7 @@ export const ExtraText = styled.Text`
   justify-content: center;
   align-content: center;
   color: ${tertiary};
-  font-size: 10px;
-`
-
-export const TextLink = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
+  font-size: 16px;
 `
 
 export const TextLinkCotent = styled.Text`

@@ -15,23 +15,42 @@ import {
   StyledLine,
   ExtraText,
   ExtraView,
-  TextLink,
+  StyledCalendarIcon,
   TextLinkCotent,
   Colors
 } from './Styles'
-import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
+import {
+  ScrollView,
+  KeyboardAvoidingView,
+  View,
+  TouchableOpacity
+} from 'react-native'
 import { Octicons, Ionicons } from '@expo/vector-icons'
-import DateTimePicker from '@react-native-community/datetimepicker'
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
+//import WelcomeScreen from './WelcomeScreen'
 // Formik
 import { Formik } from 'formik'
 const { brand, darkLight, primary } = Colors
 export default function SignupScreen({ navigation, route }) {
   const [hidePassword, setHidePassword] = useState(true)
-  const [show, setShow] = useState(false)
-  const [date, setDate] = useState(new Date(2000, 0, 1))
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
   const [birthDate, setBirthDate] = useState()
-  const onChange = (event, selectedDate) => {}
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true)
+  }
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false)
+  }
+
+  const handleConfirm = (date) => {
+    console.warn('A date has been picked: ', date)
+    setBirthDate(date)
+    hideDatePicker()
+  }
 
   return (
     <KeyboardAvoidingView
@@ -44,16 +63,13 @@ export default function SignupScreen({ navigation, route }) {
           <InnerContainer>
             <PageTitle>News App</PageTitle>
             <SubTitle>Sign up</SubTitle>
-            {show && (
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-              />
-            )}
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
 
             <Formik
               initialValues={{
@@ -91,12 +107,14 @@ export default function SignupScreen({ navigation, route }) {
 
                   <ScreenTextInput
                     label="Date of Birth"
-                    icon="calendar"
-                    placeholder="yyyy - mmmm - dd"
+                    placeholder="YYYY-MM-DD"
                     placeholderTextColor={darkLight}
                     onChangeText={handleChange('dateOfBirth')}
                     onBlur={handleBlur('dateOfBirth')}
-                    value={values.dateOfBirth}
+                    isDate={true}
+                    value={birthDate ? birthDate.toDateString() : ''}
+                    editable={false}
+                    showDatePicker={showDatePicker}
                   />
 
                   <ScreenTextInput
@@ -151,6 +169,8 @@ const ScreenTextInput = ({
   icon,
   isPassword,
   hidePassword,
+  isDate,
+  showDatePicker,
   setHidePassword,
   ...props
 }) => {
@@ -159,8 +179,19 @@ const ScreenTextInput = ({
       <StyledLeftIcon>
         <Octicons name={icon} size={25} color={brand} />
       </StyledLeftIcon>
+
       <StyledTextLabel>{label}</StyledTextLabel>
-      <StyledTextInput {...props} />
+      {!isDate && <StyledTextInput {...props} />}
+
+      {isDate && (
+        <TouchableOpacity onPress={showDatePicker}>
+          <StyledCalendarIcon>
+            <Octicons name="calendar" size={25} color={brand} />
+          </StyledCalendarIcon>
+          <StyledTextInput {...props} />
+        </TouchableOpacity>
+      )}
+
       {isPassword && (
         <StyledRightIcon onPress={() => setHidePassword(!hidePassword)}>
           <Ionicons
