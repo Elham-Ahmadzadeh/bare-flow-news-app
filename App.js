@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
-import React, { useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
+import { Platform, StatusBar } from 'react-native'
 import { EventRegister } from 'react-native-event-listeners'
 import { NavigationContainer } from '@react-navigation/native'
 import AppNavigator from './navigator/AppNavigator'
@@ -10,6 +11,7 @@ import ThemeContext from './context/ThemeContext'
 import { NewsContextProvider } from './context/NewsContext'
 import MainTheme from './style/MainTheme'
 import Footer from './componets/Footer'
+import SplashScreen from 'react-native-splash-screen'
 
 function App() {
   const [isEnabled, setIsEnabled] = useState(false)
@@ -24,13 +26,16 @@ function App() {
       EventRegister.removeEventListener(eventListener)
     }
   })
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
 
   const [fontsLoaded] = useFonts({
     openSans: require('./assets/fonts/OpenSans-Regular.ttf'),
-    openSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
+    openSansBold: require('./assets/fonts/OpenSans-Bold.ttf')
   })
   state = {
-    isReady: false,
+    isReady: false
   }
   if (!fontsLoaded && !state.isReady) {
     return (
@@ -41,16 +46,21 @@ function App() {
     )
   } else {
     return (
-      <ThemeContext.Provider
-        value={isEnabled === true ? MainTheme.darkTheme : MainTheme.lightTheme}
-      >
-        <NewsContextProvider>
-          <NavigationContainer ref={navigationRef}>
-            <AppNavigator />
-            <Footer />
-          </NavigationContainer>
-        </NewsContextProvider>
-      </ThemeContext.Provider>
+      <Fragment>
+        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+        <ThemeContext.Provider
+          value={
+            isEnabled === true ? MainTheme.darkTheme : MainTheme.lightTheme
+          }
+        >
+          <NewsContextProvider>
+            <NavigationContainer ref={navigationRef}>
+              <AppNavigator />
+              <Footer />
+            </NavigationContainer>
+          </NewsContextProvider>
+        </ThemeContext.Provider>
+      </Fragment>
     )
   }
 }
