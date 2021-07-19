@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
-  Animated,
+  Animated
 } from 'react-native'
 import Styles from './Styles'
 import { NewsContext } from '../../context/NewsContext'
@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
         key={item.url}
         style={[
           Styles.listNews,
-          { borderBottomColor: MainTheme.borderBottomColor },
+          { borderBottomColor: MainTheme.borderBottomColor }
         ]}
       >
         <Text style={[Styles.title, { color: MainTheme.color }]}>
@@ -59,7 +59,7 @@ export default function Home({ navigation }) {
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           {
-            useNativeDriver: false,
+            useNativeDriver: false
           }
         )}
       />

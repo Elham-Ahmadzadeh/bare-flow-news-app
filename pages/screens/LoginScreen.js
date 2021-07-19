@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   StyledContainer,
@@ -13,7 +13,6 @@ import {
   StyledTextLabel,
   StyledButton,
   StyledButtonText,
-  messageBox,
   StyledLine,
   ExtraText,
   ExtraView,
@@ -23,18 +22,22 @@ import {
 } from './Styles'
 import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
+import ThemeContext from '../../context/ThemeContext'
 
 // Formik
 import { Formik } from 'formik'
+
 const { brand, darkLight, primary } = Colors
-export default function LoginScreen({ navigation, route }) {
+export default function LoginScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true)
+  const MainTheme = useContext(ThemeContext)
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StyledContainer>
+      <StyledContainer style={{ backgroundColor: MainTheme.backgroundColor }}>
         <StatusBar style="auto" />
         <ScrollView>
           <InnerContainer>
@@ -43,7 +46,7 @@ export default function LoginScreen({ navigation, route }) {
               source={require('../../assets/img/flower.png')}
             />
             <PageTitle>News App</PageTitle>
-            <SubTitle>Login</SubTitle>
+            <SubTitle style={{ color: MainTheme.color }}>Login</SubTitle>
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={(values) => {
@@ -61,6 +64,7 @@ export default function LoginScreen({ navigation, route }) {
                     onBlur={handleBlur('email')}
                     value={values.email}
                     keyboardType="email-address"
+                    style={{ color: MainTheme.color }}
                   />
                   <ScreenTextInput
                     label="Password"
@@ -75,7 +79,7 @@ export default function LoginScreen({ navigation, route }) {
                     hidePassword={hidePassword}
                     setHidePassword={setHidePassword}
                   />
-                  {/*   <messageBox>.....Hello</messageBox> */}
+
                   <StyledButton onPress={handleSubmit}>
                     <StyledButtonText>Login</StyledButtonText>
                   </StyledButton>
@@ -87,7 +91,9 @@ export default function LoginScreen({ navigation, route }) {
                     </StyledButtonText>
                   </StyledButton>
                   <ExtraView>
-                    <ExtraText>Dont have an account?</ExtraText>
+                    <ExtraText style={{ color: MainTheme.color }}>
+                      Dont have an account?
+                    </ExtraText>
                     <TextLinkCotent onPress={() => navigation.push('Signup')}>
                       Sign up
                     </TextLinkCotent>

@@ -10,7 +10,7 @@ export const Colors = {
   green: '#10B981',
   red: '#EF4444'
 }
-const { primary, secondry, tertiary, darkLight, brand, green, red } = Colors
+const { primary, secondry, tertiary, darkLight, brand, green } = Colors
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -116,10 +116,6 @@ export const StyledButtonText = styled.Text`
   `}
 `
 
-export const messageBox = styled.Text`
-  text-align: center;
-  font-size: 13px;
-`
 export const StyledLine = styled.View`
   height: 1px;
   width: 100%;

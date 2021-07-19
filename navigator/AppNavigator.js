@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Header from '../componets/Header'
 import Home from '../pages/home/Home'
 import NewsDetail from '../pages/home/NewsDetail'
-import ChatTopTab from '../pages/chat/ChatTopTab'
+import ChatTopTab from '../pages/chat/Tab/ChatTopTab'
 import LoginScreen from '../pages/screens/LoginScreen'
 import SignupScreen from '../pages/screens/SignupScreen'
 import { HeaderBackButton } from '@react-navigation/stack'
@@ -18,14 +18,14 @@ export default function AppNavigator() {
         name="Globomantics"
         component={Home}
         options={{
-          header: () => <Header headerDisplay="Globomantics" />,
+          header: () => <Header headerDisplay="Globomantics" />
         }}
       />
       <Stack.Screen
         name="NewsDetail"
         component={NewsDetail}
         options={{
-          header: () => <Header headerDisplay="News" />,
+          header: () => <Header headerDisplay="News" />
         }}
       />
       <Stack.Screen
@@ -38,8 +38,10 @@ export default function AppNavigator() {
               onPress={() => navigation.navigate('Globomantics')}
               label="Back"
             />
-
           ),
+          headerStyle: {
+            backgroundColor: '#ceecd0'
+          }
         })}
       />
       <Stack.Screen
@@ -48,18 +50,18 @@ export default function AppNavigator() {
         options={{
           headerLeft: () => null,
           headerStyle: {
-            backgroundColor: '#ceecd0',
-          },
+            backgroundColor: '#ceecd0'
+          }
         }}
       />
-         <Stack.Screen
+      <Stack.Screen
         name="Signup"
         component={SignupScreen}
         options={{
           headerLeft: () => null,
           headerStyle: {
-            backgroundColor: '#ceecd0',
-          },
+            backgroundColor: '#ceecd0'
+          }
         }}
       />
     </Stack.Navigator>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   StyledContainer,
@@ -27,13 +27,14 @@ import {
 } from 'react-native'
 import { Octicons, Ionicons } from '@expo/vector-icons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import ThemeContext from '../../context/ThemeContext'
 //import WelcomeScreen from './WelcomeScreen'
 // Formik
 import { Formik } from 'formik'
-const { brand, darkLight, primary } = Colors
-export default function SignupScreen({ navigation, route }) {
+const { brand, darkLight } = Colors
+export default function SignupScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true)
-
+  const MainTheme = useContext(ThemeContext)
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
 
   const [birthDate, setBirthDate] = useState()
@@ -57,12 +58,12 @@ export default function SignupScreen({ navigation, route }) {
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StyledContainer>
+      <StyledContainer style={{ backgroundColor: MainTheme.backgroundColor }}>
         <StatusBar style="auto" />
         <ScrollView>
           <InnerContainer>
             <PageTitle>News App</PageTitle>
-            <SubTitle>Sign up</SubTitle>
+            <SubTitle style={{ color: MainTheme.color }}>Sign Up</SubTitle>
 
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
@@ -150,7 +151,9 @@ export default function SignupScreen({ navigation, route }) {
                   </StyledButton>
                   <StyledLine />
                   <ExtraView>
-                    <ExtraText>Already have an account?</ExtraText>
+                    <ExtraText style={{ color: MainTheme.color }}>
+                      Already have an account?
+                    </ExtraText>
                     <TextLinkCotent onPress={() => navigation.push('Login')}>
                       Log in
                     </TextLinkCotent>
