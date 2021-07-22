@@ -10,7 +10,7 @@ export const Colors = {
   green: '#10B981',
   red: '#EF4444'
 }
-const { primary, secondry, tertiary, darkLight, brand, green } = Colors
+const { primary, secondry, tertiary, darkLight, brand, green, red } = Colors
 
 export const StyledContainer = styled.View`
   flex: 1;
@@ -136,7 +136,12 @@ export const ExtraText = styled.Text`
   font-size: 16px;
 `
 
-export const TextLinkCotent = styled.Text`
+export const TextLinkContent = styled.Text`
   color: ${brand};
   font-size: 15px;
+`
+
+export const ErrorText = styled.Text`
+  fontsize: 14px;
+  color: ${red};
 `

@@ -16,8 +16,9 @@ import {
   ExtraText,
   ExtraView,
   StyledCalendarIcon,
-  TextLinkCotent,
-  Colors
+  TextLinkContent,
+  Colors,
+  ErrorText
 } from './Styles'
 import {
   ScrollView,
@@ -31,6 +32,36 @@ import ThemeContext from '../../context/ThemeContext'
 //import WelcomeScreen from './WelcomeScreen'
 // Formik
 import { Formik } from 'formik'
+import * as yup from 'yup'
+//YUP
+const signUpValidationSchema = yup.object().shape({
+  fullName: yup
+    .string()
+    .min(4, 'Too Short!')
+    .max(50, 'Too Long!')
+    .matches(/(\w.+\s).+/, 'Enter at least 2 names')
+    .required('Full name is required'),
+  email: yup
+    .string()
+    .email('Please enter valid email')
+    .required('Email is required'),
+  password: yup
+    .string()
+    .matches(/\w*[a-z]\w*/, 'Password must have a small letter')
+    .matches(/\w*[A-Z]\w*/, 'Password must have a capital letter')
+    .matches(/\d/, 'Password must have a number')
+    .matches(
+      /[!@#$%^&*()\-_"=+{}; :,<.>]/,
+      'Password must have a special character'
+    )
+    .min(6, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Passwords do not match')
+    .required('Confirm password is required')
+})
+
 const { brand, darkLight } = Colors
 export default function SignupScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true)
@@ -73,6 +104,7 @@ export default function SignupScreen({ navigation }) {
             />
 
             <Formik
+              validationSchema={signUpValidationSchema}
               initialValues={{
                 fullName: '',
                 dateOfBirth: '',
@@ -84,7 +116,14 @@ export default function SignupScreen({ navigation }) {
                 console.log(values)
               }}
             >
-              {({ handleChange, handleBlur, handleSubmit, values }) => (
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                errors,
+                isValid,
+                values
+              }) => (
                 <StyledFormArea>
                   <ScreenTextInput
                     label="Full name"
@@ -95,6 +134,7 @@ export default function SignupScreen({ navigation }) {
                     onBlur={handleBlur('fullName')}
                     value={values.fullName}
                   />
+                  {errors.fullName && <ErrorText>{errors.fullName}</ErrorText>}
                   <ScreenTextInput
                     label="Email Address"
                     icon="mail"
@@ -105,7 +145,7 @@ export default function SignupScreen({ navigation }) {
                     value={values.email}
                     keyboardType="email-address"
                   />
-
+                  {errors.email && <ErrorText>{errors.email}</ErrorText>}
                   <ScreenTextInput
                     label="Date of Birth"
                     placeholder="YYYY-MM-DD"
@@ -130,8 +170,9 @@ export default function SignupScreen({ navigation }) {
                     isPassword={true}
                     hidePassword={hidePassword}
                     setHidePassword={setHidePassword}
+                    editable={true}
                   />
-
+                  {errors.password && <ErrorText>{errors.password}</ErrorText>}
                   <ScreenTextInput
                     label="Confirm Password"
                     icon="lock"
@@ -144,9 +185,12 @@ export default function SignupScreen({ navigation }) {
                     isPassword={true}
                     hidePassword={hidePassword}
                     setHidePassword={setHidePassword}
+                    editable={true}
                   />
-
-                  <StyledButton onPress={handleSubmit}>
+                  {errors.confirmPassword && (
+                    <ErrorText>{errors.confirmPassword}</ErrorText>
+                  )}
+                  <StyledButton onPress={handleSubmit} disabled={!isValid}>
                     <StyledButtonText>Sign up</StyledButtonText>
                   </StyledButton>
                   <StyledLine />
@@ -154,9 +198,9 @@ export default function SignupScreen({ navigation }) {
                     <ExtraText style={{ color: MainTheme.color }}>
                       Already have an account?
                     </ExtraText>
-                    <TextLinkCotent onPress={() => navigation.push('Login')}>
+                    <TextLinkContent onPress={() => navigation.push('Login')}>
                       Log in
-                    </TextLinkCotent>
+                    </TextLinkContent>
                   </ExtraView>
                 </StyledFormArea>
               )}

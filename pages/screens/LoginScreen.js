@@ -16,9 +16,9 @@ import {
   StyledLine,
   ExtraText,
   ExtraView,
-  TextLink,
-  TextLinkCotent,
-  Colors
+  TextLinkContent,
+  Colors,
+  ErrorText
 } from './Styles'
 import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons'
@@ -26,6 +26,19 @@ import ThemeContext from '../../context/ThemeContext'
 
 // Formik
 import { Formik } from 'formik'
+import * as yup from 'yup'
+
+//YUP
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter valid email')
+    .required('Email Address is Required'),
+  password: yup
+    .string()
+    .min(6, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required')
+})
 
 const { brand, darkLight, primary } = Colors
 export default function LoginScreen({ navigation }) {
@@ -48,12 +61,20 @@ export default function LoginScreen({ navigation }) {
             <PageTitle>News App</PageTitle>
             <SubTitle style={{ color: MainTheme.color }}>Login</SubTitle>
             <Formik
+              validationSchema={loginValidationSchema}
               initialValues={{ email: '', password: '' }}
               onSubmit={(values) => {
                 console.log(values)
               }}
             >
-              {({ handleChange, handleBlur, handleSubmit, values }) => (
+              {({
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                errors,
+                isValid,
+                values
+              }) => (
                 <StyledFormArea>
                   <ScreenTextInput
                     label="Email Address"
@@ -66,6 +87,7 @@ export default function LoginScreen({ navigation }) {
                     keyboardType="email-address"
                     style={{ color: MainTheme.color }}
                   />
+                  {errors.email && <ErrorText>{errors.email}</ErrorText>}
                   <ScreenTextInput
                     label="Password"
                     icon="lock"
@@ -79,8 +101,8 @@ export default function LoginScreen({ navigation }) {
                     hidePassword={hidePassword}
                     setHidePassword={setHidePassword}
                   />
-
-                  <StyledButton onPress={handleSubmit}>
+                  {errors.password && <ErrorText>{errors.password}</ErrorText>}
+                  <StyledButton onPress={handleSubmit} disabled={!isValid}>
                     <StyledButtonText>Login</StyledButtonText>
                   </StyledButton>
                   <StyledLine />
@@ -94,9 +116,9 @@ export default function LoginScreen({ navigation }) {
                     <ExtraText style={{ color: MainTheme.color }}>
                       Dont have an account?
                     </ExtraText>
-                    <TextLinkCotent onPress={() => navigation.push('Signup')}>
+                    <TextLinkContent onPress={() => navigation.push('Signup')}>
                       Sign up
-                    </TextLinkCotent>
+                    </TextLinkContent>
                   </ExtraView>
                 </StyledFormArea>
               )}
