@@ -1,4 +1,4 @@
-/* import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   StyledContainer,
@@ -16,8 +16,7 @@ import {
   StyledLine,
   ExtraText,
   ExtraView,
-  TextLink,
-  TextLinkCotent,
+  TextLinkContent,
   Colors
 } from './Styles'
 import { ScrollView, KeyboardAvoidingView, View } from 'react-native'
@@ -50,6 +49,7 @@ export default function WelcomeScreen({ navigation }) {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={(values) => {
+
                 console.log(values)
               }}
             >
@@ -94,9 +94,9 @@ export default function WelcomeScreen({ navigation }) {
                     <ExtraText style={{ color: MainTheme.color }}>
                       Dont have an account?
                     </ExtraText>
-                    <TextLinkCotent onPress={() => navigation.push('Signup')}>
+                    <TextLinkContent onPress={() => navigation.push('Signup')}>
                       Sign up
-                    </TextLinkCotent>
+                    </TextLinkContent>
                   </ExtraView>
                 </StyledFormArea>
               )}
@@ -134,4 +134,4 @@ const ScreenTextInput = ({
     </View>
   )
 }
- */
+

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useLayoutEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import {
   StyledContainer,
@@ -29,7 +29,7 @@ import {
 import { Octicons, Ionicons } from '@expo/vector-icons'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import ThemeContext from '../../context/ThemeContext'
-//import WelcomeScreen from './WelcomeScreen'
+
 // Formik
 import { Formik } from 'formik'
 import * as yup from 'yup'
@@ -38,7 +38,6 @@ const signUpValidationSchema = yup.object().shape({
   fullName: yup
     .string()
     .min(4, 'Too Short!')
-    .max(50, 'Too Long!')
     .matches(/(\w.+\s).+/, 'Enter at least 2 names')
     .required('Full name is required'),
   email: yup
@@ -63,6 +62,7 @@ const signUpValidationSchema = yup.object().shape({
 })
 
 const { brand, darkLight } = Colors
+
 export default function SignupScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true)
   const MainTheme = useContext(ThemeContext)
@@ -112,8 +112,13 @@ export default function SignupScreen({ navigation }) {
                 email: '',
                 password: ''
               }}
-              onSubmit={(values) => {
-                console.log(values)
+              onSubmit={async (values) => {
+                try {
+                  navigation.navigate('Welcome')
+                  console.log(values)
+                } catch (err) {
+                  console.log(err)
+                }
               }}
             >
               {({
@@ -190,7 +195,11 @@ export default function SignupScreen({ navigation }) {
                   {errors.confirmPassword && (
                     <ErrorText>{errors.confirmPassword}</ErrorText>
                   )}
-                  <StyledButton onPress={handleSubmit} disabled={!isValid}>
+                  <StyledButton
+                    onPress={handleSubmit}
+                    navigation={navigation}
+                    disabled={!isValid}
+                  >
                     <StyledButtonText>Sign up</StyledButtonText>
                   </StyledButton>
                   <StyledLine />
@@ -198,7 +207,9 @@ export default function SignupScreen({ navigation }) {
                     <ExtraText style={{ color: MainTheme.color }}>
                       Already have an account?
                     </ExtraText>
-                    <TextLinkContent onPress={() => navigation.push('Login')}>
+                    <TextLinkContent
+                      onPress={() => navigation.navigate('Login')}
+                    >
                       Log in
                     </TextLinkContent>
                   </ExtraView>

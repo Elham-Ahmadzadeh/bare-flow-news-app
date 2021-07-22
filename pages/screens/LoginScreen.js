@@ -63,8 +63,13 @@ export default function LoginScreen({ navigation }) {
             <Formik
               validationSchema={loginValidationSchema}
               initialValues={{ email: '', password: '' }}
-              onSubmit={(values) => {
-                console.log(values)
+              onSubmit={async (values) => {
+                try {
+                  navigation.navigate('Welcome')
+                  console.log(values)
+                } catch (err) {
+                  console.log(err)
+                }
               }}
             >
               {({

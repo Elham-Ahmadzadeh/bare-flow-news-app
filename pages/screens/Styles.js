@@ -142,6 +142,6 @@ export const TextLinkContent = styled.Text`
 `
 
 export const ErrorText = styled.Text`
-  fontsize: 14px;
+  font-size: 14px;
   color: ${red};
 `

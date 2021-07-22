@@ -7,7 +7,9 @@ import NewsDetail from '../pages/home/NewsDetail'
 import ChatTopTab from '../pages/chat/Tab/ChatTopTab'
 import LoginScreen from '../pages/screens/LoginScreen'
 import SignupScreen from '../pages/screens/SignupScreen'
+import WelcomeScreen from '../pages/screens/WelcomeScreen'
 import { HeaderBackButton } from '@react-navigation/stack'
+
 
 export default function AppNavigator() {
   const Stack = createStackNavigator()
@@ -57,6 +59,16 @@ export default function AppNavigator() {
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
+        options={{
+          headerLeft: () => null,
+          headerStyle: {
+            backgroundColor: '#ceecd0'
+          }
+        }}
+      />
+        <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
         options={{
           headerLeft: () => null,
           headerStyle: {
